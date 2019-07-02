@@ -92,14 +92,51 @@ C++ template library for linear algebra:
 Results & Reflection
 --------------------
 
-![Velocity\_Fusion](results/Velocity_Fusion_scaled.png)
+In this section are shown RMSE values for different scenarios:
+
+**Position RMSE values for Fusion (Radar + Lidar) scenario**
+
+RMSE for x and y position converts to value under .11.
 
 ![Position\_Fusion](results/Position_Fusion_scaled.png)
 
+**Velocity RMSE values for Fusion (Radar + Lidar) scenario**
+
+RMSE for x and y position converts to value under .52.
+
+![Velocity\_Fusion](results/Velocity_Fusion_scaled.png)
+
+#### Graphs below contain values from three different scenarios:
+
+     * Fusion
+     * Only Lidar
+     * Only Radar
+
+**X position RMSE values**
+
 ![PX](results/PX_LidarRadarAndFusion_scaled.png)
+
+**Y position RMSE values**
 
 ![PY](results/PY_LidarRadarAndFusion_scaled.png)
 
+**X velocity RMSE values**
+
 ![VX](results/VX_LidarRadarAndFusion_scaled.png)
 
+**Y velocity RMSE values**
+
 ![VY](results/VY_LidarRadarAndFusion_scaled.png)
+
+Also in the folder `results` it is possible to find recorded simulation
+for fusion scenario on 1st and 2nd datasets.
+
+Based on obtained results the fusion achieves a better level of accuracy
+than prediction based only on one type of sensor.
+
+As future work it would be also intresting to try the Unscented Kalman
+Filter (UKF), which is using a deterministic sampling approach.
+
+Also it would be beneficial to add more sensors, e.g. camera, FRR, SRR
+and another type of Lidar. And find the balance between better
+prediction and the process speed.
