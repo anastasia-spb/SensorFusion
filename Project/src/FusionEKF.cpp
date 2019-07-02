@@ -37,6 +37,7 @@ FusionEKF::FusionEKF()
     H_laser_ << 1.0, 0.0, 0.0, 0.0,
         0.0, 1.0, 0.0, 0.0;
 
+    // Use noise_ax = 9 and noise_ay = 9 for your Q matrix.
     noise_ax_ = 9.0f;
     noise_ay_ = 9.0f;
 
@@ -92,6 +93,12 @@ void FusionEKF::ProcessFirstMeasurement(const MeasurementPackage &measurement_pa
 }
 
 void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
+
+    if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR)
+    {
+        return;
+    }
+
     /**
      * Initialization
      */
@@ -113,7 +120,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       */
 
       //compute the time elapsed between the current and previous measurements
-    MeasurementPackage::microsec dt_micro = measurement_pack.timestamp_ - previous_timestamp_;
+    float dt_micro = measurement_pack.timestamp_ - previous_timestamp_;
     if (dt_micro <= 0)
     {
         throw("Negative timestep!");

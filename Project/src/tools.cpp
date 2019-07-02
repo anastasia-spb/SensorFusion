@@ -1,13 +1,35 @@
 #include "tools.h"
 #include <iostream>
+#include <ctime>
+
+#include "float.h" /* FLT_EPSILON */
 
 using Eigen::VectorXd;
 using Eigen::MatrixXd;
 using std::vector;
 
-Tools::Tools() {}
+Tools::Tools()
+{
+    // generate file name based on current dat and time
+    time_t rawtime;
+    struct tm * timeinfo;
+    char buffer[80];
 
-Tools::~Tools() {}
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S", timeinfo);
+    std::string str(buffer);
+    str += "_RMSE.txt";
+
+    // open log file for RMSE values
+    log_rmse_file.open(str);
+}
+
+Tools::~Tools()
+{
+    log_rmse_file.close();
+}
 
 VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
     const vector<VectorXd> &ground_truth)
@@ -42,6 +64,9 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
     // calculate the squared root
     rmse = rmse.array().sqrt();
 
+    // log the result
+    log_rmse_file << rmse << std::endl;
+
     // return the result
     return rmse;
 }
@@ -57,15 +82,14 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state)
 
     // check division by zero
     float sum = std::pow(px, 2) + std::pow(py, 2);
-    // check division by zero
-    if (fabs(sum) < 0.0001) {
-        std::cout << "CalculateJacobian () - Error - Division by Zero" << std::endl;
-        return Hj;
-    }
-
     float sum_sq = std::sqrt(sum);
     float sum_sq_3 = std::pow(sum, 1.5f);
 
+    // check division by zero
+    if (sum < FLT_EPSILON || sum_sq < FLT_EPSILON || sum_sq_3 < FLT_EPSILON) {
+        std::cout << "CalculateJacobian () - Error - Division by Zero" << std::endl;
+        return Hj;
+    }
 
 
     // compute the Jacobian matrix

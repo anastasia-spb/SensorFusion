@@ -49,7 +49,7 @@ private:
     bool is_initialized_;
 
     // previous timestamp
-    long long previous_timestamp_;
+    MeasurementPackage::microsec previous_timestamp_;
 
     // tool object used to compute Jacobian and RMSE
     Tools tools;
