@@ -62,6 +62,7 @@ void fillMeasurementPackage(vector<MeasurementPackage>& measurement_pack_list, v
             meas_package.raw_measurements_ << ro, theta, ro_dot;
             iss >> timestamp;
             meas_package.timestamp_ = timestamp;
+            measurement_pack_list.push_back(meas_package);
         }
 
         // read ground truth values
@@ -114,6 +115,7 @@ void calculateAndPrintRMSE(vector<VectorXd>& estimations, vector<VectorXd>& grou
 {
     Tools tools;
     VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
+    std::cout << "RMSE" << std::endl;
     std::cout << RMSE << std::endl;
 }
 

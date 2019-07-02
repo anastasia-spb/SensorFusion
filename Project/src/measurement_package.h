@@ -10,7 +10,9 @@ class MeasurementPackage {
     RADAR
   } sensor_type_;
 
-  long long timestamp_;
+
+  using microsec = long long;
+  microsec timestamp_;
 
   Eigen::VectorXd raw_measurements_;
 };

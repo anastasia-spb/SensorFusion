@@ -10,7 +10,7 @@ Tools::Tools() {}
 Tools::~Tools() {}
 
 VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
-                              const vector<VectorXd> &ground_truth)
+    const vector<VectorXd> &ground_truth)
 {
     VectorXd rmse(4);
     rmse << 0, 0, 0, 0;
@@ -28,7 +28,8 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
     }
 
     // accumulate squared residuals
-    for (int i = 0; i < estimations.size(); ++i) {
+    for (auto i = 0; i < estimations.size(); ++i)
+    {
         VectorXd residual = estimations[i] - ground_truth[i];
 
         // coefficient-wise multiplication
@@ -63,7 +64,7 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state)
     }
 
     float sum_sq = std::sqrt(sum);
-    float sum_sq_3 = std::pow(sum, 1.5);
+    float sum_sq_3 = std::pow(sum, 1.5f);
 
 
 
@@ -75,16 +76,16 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state)
     float h22 = px / sum;
 
     float h3_common = (vx*py - vy*px);
-    float h31 = 0.0;
-    float h32 = 0.0;
-    if (h3_common != 0)
+    float h31 = 0.0f;
+    float h32 = 0.0f;
+    if (h3_common != 0.0f)
     {
         h31 = py*h3_common / sum_sq_3;
         h32 = -px*h3_common / sum_sq_3;
     }
 
-    Hj << h11, h12, 0.0, 0.0,
-        h21, h22, 0.0, 0.0,
+    Hj << h11, h12, 0.0f, 0.0f,
+        h21, h22, 0.0f, 0.0f,
         h31, h32, h11, h12;
 
     return Hj;
