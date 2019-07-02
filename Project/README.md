@@ -24,13 +24,17 @@ Update & Motion Update (Predict).
 The Extended Kalan Filter includes estimating parameters for nonlinear
 system identification.
 
-To implement the Kalman Filter we need to define: \* State vector `x` In
-this case our state vector tracks only position and velocity, hence
-acceleration is modelled as a random noise. \* State covariance matrix
-`P` \* State transition matrix `F` \* Process covariance matrix `Q` It
-includes `Δt` to account for the fact that as more time passes, we
-become more uncertain about object position and velocity. \* Measurement
-matrix `H` \* Measurement convariance matrix `R`
+To implement the Kalman Filter we need to define: 
+* State vector `x` 
+In this case our state vector tracks only position and velocity, hence
+acceleration is modelled as a random noise. 
+* State covariance matrix `P` 
+* State transition matrix `F` 
+* Process covariance matrix `Q` 
+It includes `Δt` to account for the fact that as more time passes, we
+become more uncertain about object position and velocity. 
+* Measurement matrix `H` 
+* Measurement convariance matrix `R`
 
 As it could be seen of the picture above we fuse two sensors: Lidar and
 Radar.
@@ -54,8 +58,10 @@ The main file was modified in order to read data from
 `obj_pose-laser-radar-synthetic-input.txt` file. The reading
 functionality was overtaken from Kalman Filter lab.
 
-Implementation of methods was added into following files: \*
-`FusionEKF.cpp` \* `kalman_filter.cpp` \* `Tools.cpp`
+Implementation of methods was added into following files: 
+* `FusionEKF.cpp` 
+* `kalman_filter.cpp` 
+* `Tools.cpp`
 
 After build on local machine, files were uploaded into Udacity workspace
 and tested using Simulation.
