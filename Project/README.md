@@ -1,4 +1,4 @@
-Extended Kalman Filter Project
+﻿Extended Kalman Filter Project
 ==============================
 
 Self-Driving Car Engineer Nanodegree Program
@@ -146,3 +146,9 @@ Filter (UKF), which is using a deterministic sampling approach.
 Also it would be beneficial to add more sensors, e.g. camera, FRR, SRR
 and another type of Lidar. And find the balance between better
 prediction and the process speed.
+
+Additional sources
+---------------------------
+
+http://home.wlu.edu/~levys/kalman_tutorial/
+http://biorobotics.ri.cmu.edu/papers/sbp_papers/integrated3/kleeman_kalman_basics.pdf
